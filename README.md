@@ -7,7 +7,7 @@ Application where users can post and share code snippets. Users can post their o
 # Models:
 
 User model: email, password, number of posts.
-code model: Title, Img, body, comment, timestamp, likes, language
+code model: Title, Img, body, description, timestamp, likes, number of saves, language, public, private
 
 
 # Post MVP
@@ -15,3 +15,5 @@ code model: Title, Img, body, comment, timestamp, likes, language
 User data would be available globally, you would be able to interact with other users. See their public code, and interact with it via likes, and saves. also add public and private options to the. Make public code searchable and filterable by keyword or language type. 
 
 # Scrum Leader:
+
+Connor
