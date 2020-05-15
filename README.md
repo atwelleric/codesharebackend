@@ -22,3 +22,7 @@ Connor
 ### Index Page
 
 ![Homepage (1)](https://user-images.githubusercontent.com/58124052/82001132-0417a600-9620-11ea-9680-9aabbaea4b74.png)
+
+### Code Snippet Info
+
+![show](https://user-images.githubusercontent.com/58124052/82001868-d59aca80-9621-11ea-9b40-9d42c0bcf842.png)
