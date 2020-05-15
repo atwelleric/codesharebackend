@@ -26,3 +26,7 @@ Connor
 ### Code Snippet Info
 
 ![show](https://user-images.githubusercontent.com/58124052/82001868-d59aca80-9621-11ea-9b40-9d42c0bcf842.png)
+
+### Edit Page
+
+![Edit](https://user-images.githubusercontent.com/58124052/82002375-3d054a00-9623-11ea-9b02-704159cb228c.png)
