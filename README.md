@@ -30,3 +30,7 @@ Connor
 ### Edit Page
 
 ![Edit](https://user-images.githubusercontent.com/58124052/82002375-3d054a00-9623-11ea-9b02-704159cb228c.png)
+
+### New Page
+
+![New](https://user-images.githubusercontent.com/58124052/82002747-3d521500-9624-11ea-81ee-fe1b119f1ad5.png)
