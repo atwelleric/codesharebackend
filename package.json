@@ -4,8 +4,7 @@
   "description": "BackEnd for the Code share app",
   "main": "index.js",
   "scripts": {
-    "test": "npm test",
-    "start": "node_modules/.bin/mocha",
+    "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "repository": {
