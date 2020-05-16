@@ -18,14 +18,11 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
 	Code.findOneAndUpdate({ _id: req.params.id }, req.body, {
 		new: true,
-	}).then((job) => {
-		// If we didn't get a job back from the query
-		if (!job) {
-			// send a 404
+	}).then((code) => {
+		if (!code) {
 			res.sendStatus(404);
 		} else {
-			// otherwise, send back the job
-			res.json(job);
+			res.json(code);
 		}
 	});
 });
@@ -33,13 +30,10 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
 	Code.findOneAndDelete({
 		_id: req.params.id,
-	}).then((job) => {
-		// If we didn't get a job back from the query
-		if (!job) {
-			// send a 404
+	}).then((code) => {
+		if (!code) {
 			res.sendStatus(404);
 		} else {
-			// otherwise, send back 204 No Content
 			res.sendStatus(204);
 		}
 	});
