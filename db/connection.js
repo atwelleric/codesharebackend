@@ -6,7 +6,7 @@ const mongoURI =
 		: 'mongodb://localhost/codeshare';
 
 mongoose
-	.connect('mongodb://localhost/codeshare', {
+	.connect(mongoURI, {
 		useNewUrlParser: true,
 		useCreateIndex: true,
 		useUnifiedTopology: true,
