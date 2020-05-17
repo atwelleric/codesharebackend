@@ -1,11 +1,17 @@
 const express = require('express');
 const Code = require('../models/code');
 const router = express.Router();
+const {
+	handleValidateId,
+	handleRecordExists,
+	handleValidateOwnership,
+} = require('../middleware/custom_errors');
+const { requireToken } = require('../middleware/auth');
 
 // index
 router.get('/', (req, res, next) => {
 	Code.find()
-	// RETURNS EMPTY OBJECT, WHY??
+		// RETURNS EMPTY OBJECT, WHY??
 		.populate('author', 'username -_id')
 		.then((codes) => res.json(codes))
 		.catch(next);
@@ -19,36 +25,30 @@ router.get('/show/:id', (req, res, next) => {
 		.catch(next);
 });
 //create
-router.post('/', (req, res, next) => {
-	Code.create(req.body)
-		.then((code) => res.json(code))
+router.post('/', requireToken, (req, res, next) => {
+	Code.create({ ...req.body, owner: req.user._id })
+		.then((code) => res.status(201).json(code))
 		.catch(next);
 });
 //update
-router.put('/:id', (req, res, next) => {
-	Code.findOneAndUpdate({ _id: req.params.id }, req.body, {
-		new: true,
-	})
+router.put('/:id', handleValidateId, requireToken, (req, res, next) => {
+	Code.findById(req.params.id)
+		.then(handleRecordExists)
+		.then((code) => handleValidateOwnership(req, code))
+		.then((code) => code.set(req.body).save())
 		.then((code) => {
-			if (!code) {
-				res.sendStatus(404);
-			} else {
-				res.json(code);
-			}
+			res.json(code);
 		})
 		.catch(next);
 });
 //delete
-router.delete('/:id', (req, res, next) => {
-	Code.findOneAndDelete({
-		_id: req.params.id,
-	})
-		.then((code) => {
-			if (!code) {
-				res.sendStatus(404);
-			} else {
-				res.sendStatus(204);
-			}
+router.delete('/:id', handleValidateId, requireToken, (req, res, next) => {
+	Code.findById(req.params.id)
+		.then(handleRecordExists)
+		.then((code) => handleValidateOwnership(req, code))
+		.then((code) => code.remove())
+		.then(() => {
+			res.sendStatus(204);
 		})
 		.catch(next);
 });

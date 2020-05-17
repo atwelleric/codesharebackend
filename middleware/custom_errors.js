@@ -46,11 +46,12 @@ class InvalidIdError extends Error {
 }
 
 
-const handleValidateOwnership = (requestObject, resource) => {
-	if (!requestObject.user._id.equals(resource.owner)) {
+const handleValidateOwnership = (req, document) => {
+	const ownerId = document.owner._id || document.owner;
+	if(!req.user._id.equals(ownerId)) {
 		throw new OwnershipError();
 	} else {
-		return record;
+		return document;
 	}
 };
 
