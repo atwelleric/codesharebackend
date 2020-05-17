@@ -5,12 +5,16 @@ const router = express.Router();
 // index
 router.get('/', (req, res, next) => {
 	Code.find()
+	// RETURNS EMPTY OBJECT, WHY??
+		.populate('author', 'username -_id')
 		.then((codes) => res.json(codes))
 		.catch(next);
 });
+
 //show
-router.get('/:id', (req, res, next) => {
+router.get('/show/:id', (req, res, next) => {
 	Code.findById(req.params.id)
+		.populate('author', 'username -_id')
 		.then((code) => res.json(code))
 		.catch(next);
 });

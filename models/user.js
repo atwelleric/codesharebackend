@@ -11,10 +11,15 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		username: String,
+
+		username: {
+			type: String,
+			required: true,
+			unique: true,
+		}
 	},
 	{
-        id: false,
+		id: false,
 		timestamps: true,
 		toJSON: {
 			virtuals: true,
