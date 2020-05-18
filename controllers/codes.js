@@ -12,7 +12,7 @@ const { requireToken } = require('../middleware/auth');
 router.get('/', (req, res, next) => {
 	Code.find()
 		// RETURNS EMPTY OBJECT, WHY??
-		.populate('author', 'username -_id')
+		.populate('author', '_id')
 		.then((codes) => res.json(codes))
 		.catch(next);
 });
@@ -20,7 +20,7 @@ router.get('/', (req, res, next) => {
 //show
 router.get('/show/:id', (req, res, next) => {
 	Code.findById(req.params.id)
-		.populate('author', 'username -_id')
+		.populate('author', '_id')
 		.then((code) => res.json(code))
 		.catch(next);
 });
@@ -43,6 +43,7 @@ router.put('/:id', handleValidateId, requireToken, (req, res, next) => {
 });
 //delete
 router.delete('/:id', handleValidateId, requireToken, (req, res, next) => {
+	console.log(req.params.id)
 	Code.findById(req.params.id)
 		.then(handleRecordExists)
 		.then((code) => handleValidateOwnership(req, code))
