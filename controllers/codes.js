@@ -12,7 +12,7 @@ const { requireToken } = require('../middleware/auth');
 router.get('/', (req, res, next) => {
 	Code.find()
 		// RETURNS EMPTY OBJECT, WHY??
-		.populate('author', '_id')
+		.populate('author', 'email')
 		.then((codes) => res.json(codes))
 		.catch(next);
 });

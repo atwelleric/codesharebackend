@@ -1,37 +1,44 @@
 {
-	"name": "codesharebackend",
-	"version": "1.0.0",
-	"description": "BackEnd for the Code share app",
-	"main": "index.js",
-	"scripts": {
-		"test": "node_modules/.bin/mocha",
-		"start": "node index.js",
-		"dev": "nodemon index.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/atwelleric/codesharebackend.git"
-	},
-	"author": "Eric Atwell",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/atwelleric/codesharebackend/issues"
-	},
-	"homepage": "https://github.com/atwelleric/codesharebackend#readme",
-	"dependencies": {
-		"bcrypt": "^4.0.1",
-		"chai": "^4.2.0",
-		"cors": "^2.8.5",
-		"dotenv": "^8.2.0",
-		"express": "^4.17.1",
-		"jsonwebtoken": "^8.5.1",
-		"mocha": "^7.1.2",
-		"mongoose": "^5.9.14",
-		"passport": "^0.4.1",
-		"passport-jwt": "^4.0.0",
-		"supertest": "^4.0.2"
-	},
-	"devDependencies": {
-		"nodemon": "^2.0.4"
-	}
+  "name": "codesharebackend",
+  "version": "1.0.0",
+  "description": "BackEnd for the Code share app",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atwelleric/codesharebackend.git"
+  },
+  "author": "Eric Atwell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atwelleric/codesharebackend/issues"
+  },
+  "homepage": "https://github.com/atwelleric/codesharebackend#readme",
+  "dependencies": {
+    "aws-sdk": "^2.679.0",
+    "bcrypt": "^4.0.1",
+    "chai": "^4.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^7.1.2",
+    "mongoose": "^5.9.14",
+    "multer": "^1.4.2",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "supertest": "^4.0.2",
+    "uuid": "^8.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "keywords": []
 }

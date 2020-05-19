@@ -4,25 +4,25 @@ const supertest = require('supertest');
 const api = supertest('http://localhost:4000');
 
 //target all the codes
-describe('GET /codes', () => {
+describe('GET /', () => {
 	it('should return a array', (done) => {
 		api
-			.get('/codes')
+			.get('/')
 			.set('Accept', 'application/json')
 			.end((error, response) => {
-				expect(response.body).to.be.an('object');
+				expect(response.body).to.be.an('array');
 			});
 		done();
 	});
 });
 
-describe('GET /codes/:id', () => {
-	it('should return arrays id', (done) => {
+describe('GET /:id', () => {
+	it('should return one object by id', (done) => {
 		api
-			.get('/codes/5ec04b3d4b0a8a0fa692d418')
+			.get('/5ec04b3d4b0a8a0fa692d418')
 			.set('Accept', 'application/json')
 			.end((error, response) => {
-				expect(response.body).to.include.all.keys('_id');
+				expect(response.body).to.be.an('object');
 				done();
 			});
 	});
