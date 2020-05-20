@@ -1,4 +1,5 @@
 node_modules
+arn.txt
 # Secrets not to be shared
 .env
 accessKeys.csv
