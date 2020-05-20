@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const seedAdmin = require('./seedadmin');
+const seedAdmin = require('./seedadmin.json');
 
 User.deleteMany()
 	.then(() => User.insertMany(seedAdmin))
