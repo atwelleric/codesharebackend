@@ -15,7 +15,6 @@ const s3Files = require('../lib/s3files');
 // index
 router.get('/', (req, res, next) => {
 	Code.find()
-		// RETURNS EMPTY OBJECT, WHY??
 		.populate('author', 'email')
 		.then((codes) => res.json(codes))
 		.catch(next);
