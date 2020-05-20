@@ -33,7 +33,7 @@ const createUserToken = (req, user) => {
 		err.statusCode = 422;
 		throw err;
 	}
-	return jwt.sign({ id: user._id }, secret, { expiresIn: 36000 });
+	return jwt.sign({ id: user._id }, secret, { expiresIn: 100000000 });
 };
 
 module.exports = {
