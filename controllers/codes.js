@@ -36,8 +36,8 @@ router.get('/show/:id', (req, res, next) => {
 
 //AWS STUFF
 
-router.post('/', upload.single('img'), async (req, res, next) => {
-	console.log("posting")
+router.post('/', requireToken, upload.single('img'), async (req, res, next) => {
+	console.log('posting');
 	try {
 		const s3file = await s3Files(req.file);
 		const code = await Code.create({
