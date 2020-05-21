@@ -64,7 +64,7 @@ router.put(
 			const code = await Code.findById({
 				...req.body,
 				imgUrl: s3file ? s3file.Location : 'https://i.imgur.com/TjZqVZB.jpg',
-				img: s3file.Location,
+				img: s3file === null ? req.body.img : s3file.Location,
 				author: req.user._id,
 			});
 			res.json(code);
