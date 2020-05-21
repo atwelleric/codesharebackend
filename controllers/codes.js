@@ -14,6 +14,7 @@ const s3Files = require('../lib/s3Files');
 
 // index
 router.get('/', (req, res, next) => {
+	console.log("hello wolrd")
 	Code.find()
 		.populate('author', 'email')
 		.then((codes) => res.json(codes))
@@ -37,7 +38,7 @@ router.get('/show/:id', (req, res, next) => {
 //AWS STUFF
 
 router.post('/', requireToken, upload.single('img'), async (req, res, next) => {
-	console.log('posting');
+	console.log(req.params.key);
 	try {
 		const s3file = await s3Files(req.file);
 		const code = await Code.create({
@@ -45,7 +46,6 @@ router.post('/', requireToken, upload.single('img'), async (req, res, next) => {
 			imgUrl: s3file ? s3file.location : 'https://i.imgur.com/TjZqVZB.jpg',
 			author: req.user._id,
 		});
-		console.log();
 		res.json(code);
 	} catch (err) {
 		next(err);

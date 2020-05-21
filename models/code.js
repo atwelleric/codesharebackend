@@ -9,13 +9,13 @@ const codeSchema = new mongoose.Schema(
 		author: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
-			required: true
-		}
+			required: true,
+		},
+		imgUrl: String,
 	},
 	{
 		timestamp: true,
-	},
-
+	}
 );
 
 module.exports = mongoose.model('Code', codeSchema);
