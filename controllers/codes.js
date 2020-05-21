@@ -53,16 +53,37 @@ router.post('/', requireToken, upload.single('img'), async (req, res, next) => {
 	}
 });
 //update
-router.put('/:id', handleValidateId, requireToken, (req, res, next) => {
-	Code.findById(req.params.id)
-		.then(handleRecordExists)
-		.then((code) => handleValidateOwnership(req, code))
-		.then((code) => code.set(req.body).save())
-		.then((code) => {
+router.put(
+	'/:id',
+	handleValidateId,
+	requireToken,
+	upload.single('img'),
+	async (req, res, next) => {
+		try {
+			const s3file = await s3Files(req.file);
+			const code = await Code.findById({
+				...req.body,
+				imgUrl: s3file ? s3file.Location : 'https://i.imgur.com/TjZqVZB.jpg',
+				img: s3file.Location,
+				author: req.user._id,
+			});
 			res.json(code);
-		})
-		.catch(next);
-});
+		} catch (err) {
+			next(err);
+		}
+		// Code.findById(req.params.id)
+		// 	.then(handleRecordExists)
+		// 	.then((code) => handleValidateOwnership(req, code))
+		// 	//.findByID(/:id)
+		// 	//if req.file exists, then upload the img
+		// 	//otherwise, save the data in req.body
+		// 	.then((code) => code.set(req.body).save())
+		// 	.then((code) => {
+		// 		res.json(code);
+		// 	})
+		// 	.catch(next);
+	}
+);
 //delete
 router.delete('/:id', handleValidateId, requireToken, (req, res, next) => {
 	console.log(req.params.id);
