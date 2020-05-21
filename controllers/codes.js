@@ -11,6 +11,7 @@ const { requireToken } = require('../middleware/auth');
 const multer = require('multer');
 const upload = multer();
 const s3Files = require('../lib/s3Files');
+const uuid = require('uuid');
 
 // index
 router.get('/', (req, res, next) => {
