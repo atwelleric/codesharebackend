@@ -43,7 +43,7 @@ router.post('/', requireToken, upload.single('img'), async (req, res, next) => {
 		const s3file = await s3Files(req.file);
 		const code = await Code.create({
 			...req.body,
-			imgUrl: s3file ? s3file.location : 'https://i.imgur.com/TjZqVZB.jpg',
+			img: s3file ? s3file.location : 'https://i.imgur.com/TjZqVZB.jpg',
 			author: req.user._id,
 		});
 		res.json(code);
