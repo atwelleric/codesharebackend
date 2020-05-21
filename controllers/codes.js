@@ -38,12 +38,13 @@ router.get('/show/:id', (req, res, next) => {
 //AWS STUFF
 
 router.post('/', requireToken, upload.single('img'), async (req, res, next) => {
-	console.log(req.params.key);
+	console.log();
 	try {
 		const s3file = await s3Files(req.file);
 		const code = await Code.create({
 			...req.body,
-			img: s3file ? s3file.location : 'https://i.imgur.com/TjZqVZB.jpg',
+			imgUrl: s3file ? s3file.location : 'https://i.imgur.com/TjZqVZB.jpg',
+			img: "google.com",
 			author: req.user._id,
 		});
 		res.json(code);

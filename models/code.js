@@ -11,7 +11,7 @@ const codeSchema = new mongoose.Schema(
 			ref: 'User',
 			required: true,
 		},
-		imgUrl: String,
+		
 	},
 	{
 		timestamp: true,
