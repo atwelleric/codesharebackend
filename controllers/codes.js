@@ -14,7 +14,7 @@ const s3Files = require('../lib/s3Files');
 
 // index
 router.get('/', (req, res, next) => {
-	console.log("hello wolrd")
+	console.log('hello wolrd');
 	Code.find()
 		.populate('author', 'email')
 		.then((codes) => res.json(codes))
@@ -44,7 +44,9 @@ router.post('/', requireToken, upload.single('img'), async (req, res, next) => {
 		const code = await Code.create({
 			...req.body,
 			imgUrl: s3file ? s3file.location : 'https://i.imgur.com/TjZqVZB.jpg',
-			img: "google.com",
+			img: `https://codesharestorage.s3.us-east-2.amazonaws.com/${uuid.v4()}_${
+				file.originalname
+			}`,
 			author: req.user._id,
 		});
 		res.json(code);
