@@ -4,7 +4,6 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const { createUserToken } = require('../middleware/auth');
 
-
 router.get('/', (req, res, next) => {
 	User.find()
 		.then((users) => res.json(users))
@@ -28,9 +27,15 @@ router.post('/signup', async (req, res, next) => {
 
 //sign in
 router.post('/signin', (req, res, next) => {
-	User.findOne({username: req.body.username})
+	User.findOne({ username: req.body.username })
 		.then((User) => createUserToken(req, User))
-		.then((token) => res.json({ token: token, username: req.body.username }))
+		.then((token) =>
+			res.json({
+				token: token,
+				username: req.body.username,
+				email: req.body.email,
+			})
+		)
 		.catch(next);
 });
 module.exports = router;
