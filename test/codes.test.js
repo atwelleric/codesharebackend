@@ -52,6 +52,10 @@ describe('POST /', () => {
 			});
 	});
 });
+
+// NOTE
+// tests below not working correctly, I believe it is because of a user verification issue, and I am not sure how to authenticate user in a test.
+
 describe('PUT /:id', () => {
 	const updateNewCode = {
 		title: 'Too many test codes',
@@ -70,6 +74,7 @@ describe('PUT /:id', () => {
 			.get(`/${updateNewCode._id}`)
 			.set('Access', 'application/json')
 			.end((error, response) => {
+				console.log(response.body);
 				expect(response.body).to.have.property('title', 'Too many test codes');
 				done();
 			});
