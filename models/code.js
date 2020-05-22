@@ -8,10 +8,10 @@ const codeSchema = new mongoose.Schema(
 		description: String,
 		author: {
 			type: mongoose.Schema.Types.ObjectId,
+			username: String,
 			ref: 'User',
 			required: true,
 		},
-		
 	},
 	{
 		timestamp: true,
