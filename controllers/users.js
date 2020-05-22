@@ -10,6 +10,13 @@ router.get('/', (req, res, next) => {
 		.catch(next);
 });
 
+router.get('/:username', (req, res, next) => {
+	User.findOne({ username: req.params.username })
+		.then((users) => res.json(users))
+		.catch(next);
+	console.log(req);
+});
+
 // sign up
 router.post('/signup', async (req, res, next) => {
 	try {
