@@ -43,10 +43,10 @@ router.post('/', requireToken, upload.single('img'), async (req, res, next) => {
 		const s3file = await s3Files(req.file);
 		const code = await Code.create({
 			...req.body,
-			imgUrl: s3file ? s3file.Location : 'https://i.imgur.com/TjZqVZB.jpg',
-			img: s3file.Location,
+			img: s3file ? s3file.Location : 'https://i.imgur.com/TjZqVZB.jpg',
 			author: req.user._id,
 		});
+		console.log(code.img);
 		res.json(code);
 	} catch (err) {
 		next(err);
@@ -61,27 +61,33 @@ router.put(
 	async (req, res, next) => {
 		try {
 			const s3file = await s3Files(req.file);
-			const code = await Code.findById({
-				...req.body,
-				imgUrl: s3file ? s3file.Location : 'https://i.imgur.com/TjZqVZB.jpg',
-				img: s3file === null ? req.body.img : s3file.Location,
-				author: req.user._id,
-			});
-			res.json(code);
+			console.log(s3file);
+			console.log(req.body);
+			if (s3file) {
+				const code = await Code.findOneAndUpdate(
+					{ _id: req.params.id },
+					{
+						...req.body,
+						img: s3file.Location,
+					},
+					{ new: true }
+				);
+				console.log(code);
+				res.json(code);
+			} else {
+				const code = await Code.findOneAndUpdate(
+					{ _id: req.params.id },
+					{
+						...req.body,
+					},
+					{ new: true }
+				);
+				console.log(code);
+				res.json(code);
+			}
 		} catch (err) {
 			next(err);
 		}
-		// Code.findById(req.params.id)
-		// 	.then(handleRecordExists)
-		// 	.then((code) => handleValidateOwnership(req, code))
-		// 	//.findByID(/:id)
-		// 	//if req.file exists, then upload the img
-		// 	//otherwise, save the data in req.body
-		// 	.then((code) => code.set(req.body).save())
-		// 	.then((code) => {
-		// 		res.json(code);
-		// 	})
-		// 	.catch(next);
 	}
 );
 //delete
