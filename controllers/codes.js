@@ -57,6 +57,9 @@ router.put(
 	requireToken,
 	upload.single('img'),
 	async (req, res, next) => {
+		Code.findById(req.params.id)
+			.then(handleRecordExists)
+			.then((code) => handleValidateOwnership(req, code));
 		try {
 			const s3file = await s3Files(req.file);
 			if (s3file) {
