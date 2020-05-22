@@ -14,7 +14,6 @@ router.get('/:username', (req, res, next) => {
 	User.findOne({ username: req.params.username })
 		.then((users) => res.json(users))
 		.catch(next);
-	console.log(req);
 });
 
 // sign up

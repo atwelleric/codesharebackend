@@ -15,7 +15,6 @@ const uuid = require('uuid');
 
 // index
 router.get('/', (req, res, next) => {
-	console.log('hello wolrd');
 	Code.find()
 		.populate('author', 'email')
 		.then((codes) => res.json(codes))
@@ -46,7 +45,6 @@ router.post('/', requireToken, upload.single('img'), async (req, res, next) => {
 			img: s3file ? s3file.Location : 'https://i.imgur.com/1hOxlPe.png',
 			author: req.user._id,
 		});
-		console.log(code.img);
 		res.json(code);
 	} catch (err) {
 		next(err);
@@ -61,8 +59,6 @@ router.put(
 	async (req, res, next) => {
 		try {
 			const s3file = await s3Files(req.file);
-			console.log(s3file);
-			console.log(req.body);
 			if (s3file) {
 				const code = await Code.findOneAndUpdate(
 					{ _id: req.params.id },
@@ -72,7 +68,7 @@ router.put(
 					},
 					{ new: true }
 				);
-				console.log(code);
+
 				res.json(code);
 			} else {
 				const code = await Code.findOneAndUpdate(
@@ -82,7 +78,7 @@ router.put(
 					},
 					{ new: true }
 				);
-				console.log(code);
+
 				res.json(code);
 			}
 		} catch (err) {
@@ -92,7 +88,6 @@ router.put(
 );
 //delete
 router.delete('/:id', handleValidateId, requireToken, (req, res, next) => {
-	console.log(req.params.id);
 	Code.findById(req.params.id)
 		.then(handleRecordExists)
 		.then((code) => handleValidateOwnership(req, code))

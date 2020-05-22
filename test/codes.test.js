@@ -74,7 +74,6 @@ describe('PUT /:id', () => {
 			.get(`/${updateNewCode._id}`)
 			.set('Access', 'application/json')
 			.end((error, response) => {
-				console.log(response.body);
 				expect(response.body).to.have.property('title', 'Too many test codes');
 				done();
 			});
@@ -89,7 +88,6 @@ describe('DELETE /:id', () => {
 			.end((error, response) => {
 				const codes = response.body;
 				codeToDelete = codes[codes.length - 1]._id;
-				console.log(codeToDelete);
 				done();
 			});
 	});
